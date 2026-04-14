@@ -1,16 +1,40 @@
-# React + Vite
+# Mobile Shop
+App para comprar dispositivos móviles, desarrollada con React y Vite.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tecnologías
+- React 18
+- Vite
+- React Router v6
 
-Currently, two official plugins are available:
+## Requisitos
+- Node.js v18 o superior
+- npm v9 o superior
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Funcionalidades
+- Listado de móviles con barra de búsqueda
+- Detalle de producto con selección de color/almacenamiento
+- Dentro de detalle, opción añadir al carrito
+- Contador del carrito persiste en el encabezado con caché de 1 hora
+- Diseño responsive adaptativo
 
-## React Compiler
+## Instalación
+1º Clona el repositorio
+2º Instala las dependencias requeridas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+git clone https://github.com/mateolopez898-star/mobile-shop.git
+cd mobile-shop
+npm install
 
-## Expanding the ESLint configuration
+## Scripts
+|Comando | Descripción |
+|`npm run start` | Modo desarrollo |
+|`npm run build` | Compilación de producción |
+|`npm run test` | Lanzamiento de  los tests |
+|`npm run lint` | Comprobación del código|
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## API
+Base URL dispositivos: `https://itx-frontend-test.onrender.com`
+- `GET /api/product` — Listado de productos
+- `GET /api/product/:id` — Detalle de producto
+- `POST /api/cart` — Añadir producto al carrito
+
