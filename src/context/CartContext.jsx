@@ -1,6 +1,5 @@
-import { createContext, useContext, useState } from 'react'
-
-const CartContext = createContext()
+import { useState } from 'react'
+import { CartContext } from './CartContextValue.js'
 
 export function CartProvider({ children }) {
   const [cartCount, setCartCount] = useState(0)
@@ -15,5 +14,3 @@ export function CartProvider({ children }) {
     </CartContext.Provider>
   )
 }
-
-export const useCart = () => useContext(CartContext)
