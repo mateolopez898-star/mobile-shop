@@ -1,5 +1,6 @@
 import { Link, useLocation} from 'react-router-dom'
 import { useCart } from '../hooks/useCart.js'
+import styles from './Header.module.css'
 
 function Header() {
   const { cartCount } = useCart()
@@ -7,18 +8,21 @@ function Header() {
   const isDetail = location.pathname.startsWith('/product/')
 
   return (
-    <header style={{ padding: '1rem 2rem', borderBottom: '1px solid #ccc' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <h1 style={{ margin: 0 }}>Mobile Shop</h1>
+    <header className={styles.header}>
+      <div className={styles.headerTop}>
+        <Link to="/" className={styles.logo}>
+          Mobile Shop
         </Link>
-        <div>🛒 <span>{cartCount}</span></div>
+         <div className={styles.cart}>
+          🛒
+          <span className={styles.cartCount}>{cartCount}</span>
+        </div>
       </div>
-      <nav style={{ marginTop: '0.5rem', fontSize: '0.9rem' }}>
-        <Link to="/" style={{ color: '#666' }}>Inicio</Link>
+      <nav className={styles.breadcrumb}>
+        <Link to="/" className={styles.breadcrumbLink}>Inicio</Link>
         {isDetail && (
           <>
-            <span style={{ margin: '0 0.5rem', color: '#666' }}>/</span>
+            <span className={styles.separator}>/</span>
             <span>Detalle del producto</span>
           </>
         )}

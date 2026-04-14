@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProducts } from '../services/api.js'
+import styles from './ProductList.module.css'
 
 function ProductList() {
   const [products, setProducts] = useState([])
@@ -23,30 +24,34 @@ function ProductList() {
   if (loading) return <p style={{ padding: '2rem' }}>Cargando productos...</p>
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h2>Lista de productos</h2>
+    <div className={styles.container}>
+      <div className={styles.toolbar}>
+        <h2 className={styles.title}>Lista de productos</h2>
         <input
           type="text"
           placeholder="Buscar por marca o modelo..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ padding: '0.5rem', width: '250px', border: '1px solid #ccc', borderRadius: '4px' }}
+          className={styles.search}
         />
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-        {filtered.map((product) => (
-          <div
-            key={product.id}
-            onClick={() => navigate(`/product/${product.id}`)}
-            style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '1rem', cursor: 'pointer' }}
-          >
-            <img src={product.imgUrl} alt={product.model} style={{ width: '100%', height: '150px', objectFit: 'contain' }} />
-            <p><strong>{product.brand}</strong></p>
-            <p>{product.model}</p>
-            <p>{product.price} €</p>
+      <div className={styles.grid}>
+          {filtered.length === 0 ? (
+          <p className={styles.noResults}>No se encontraron productos</p>
+        ) : (
+          filtered.map((product) => (
+            <div
+              key={product.id}
+              onClick={() => navigate(`/product/${product.id}`)}
+              className={styles.card}
+            >
+            <img src={product.imgUrl} alt={product.model} className={styles.image} />
+            <p className={styles.brand}><strong>{product.brand}</strong></p>
+            <p className={styles.model}>{product.model}</p>
+            <p className={styles.price}>{product.price} €</p>
           </div>
-        ))}
+        ))
+        )}
       </div>
     </div>
   )

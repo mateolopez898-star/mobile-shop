@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getProductById, addToCart } from '../services/api.js'
 import { useCart } from '../hooks/useCart.js'
+import styles from './ProductDetail.module.css'
 
 function ProductDetail() {
   const { id } = useParams()
@@ -29,47 +30,47 @@ function ProductDetail() {
   if (loading) return <p style={{ padding: '2rem' }}>Cargando producto...</p>
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <button onClick={() => navigate('/')} style={{ marginBottom: '1rem', cursor: 'pointer' }}>
+    <div className={styles.container}>
+      <button onClick={() => navigate('/')} className={styles.backButton}>
         ← Volver al listado
       </button>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-        <div>
-          <img src={product.imgUrl} alt={product.model} style={{ width: '100%', objectFit: 'contain', maxHeight: '400px' }} />
+      <div className={styles.grid}>
+        <div className={styles.imageContainer}>
+          <img src={product.imgUrl} alt={product.model} className={styles.image} />
         </div>
-        <div>
-          <h2>{product.brand} {product.model}</h2>
-          <p><strong>Precio:</strong> {product.price} €</p>
-          <p><strong>CPU:</strong> {product.cpu}</p>
-          <p><strong>RAM:</strong> {product.ram}</p>
-          <p><strong>Sistema operativo:</strong> {product.os}</p>
-          <p><strong>Resolución:</strong> {product.displayResolution}</p>
-          <p><strong>Batería:</strong> {product.battery}</p>
-          <p><strong>Cámaras:</strong> {product.primaryCamera} / {product.secondaryCmera}</p>
-          <p><strong>Dimensiones:</strong> {product.dimentions}</p>
-          <p><strong>Peso:</strong> {product.weight} g</p>
+        <div className={styles.info}>
+          <h2 className={styles.title}>{product.brand} {product.model}</h2>
+          <p className={styles.spec}><strong>Precio:</strong> {product.price} €</p>
+          <p className={styles.spec}><strong>CPU:</strong> {product.cpu}</p>
+          <p className={styles.spec}><strong>RAM:</strong> {product.ram}</p>
+          <p className={styles.spec}><strong>Sistema operativo:</strong> {product.os}</p>
+          <p className={styles.spec}><strong>Resolución:</strong> {product.displayResolution}</p>
+          <p className={styles.spec}><strong>Batería:</strong> {product.battery}</p>
+          <p className={styles.spec}><strong>Cámaras:</strong> {product.primaryCamera} / {product.secondaryCmera}</p>
+          <p className={styles.spec}><strong>Dimensiones:</strong> {product.dimentions}</p>
+          <p className={styles.spec}><strong>Peso:</strong> {product.weight} g</p>
 
-          <div style={{ marginTop: '1rem' }}>
-            <label><strong>Color:</strong></label>
-            <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} style={{ display: 'block', marginTop: '0.5rem', padding: '0.5rem', width: '100%' }}>
-              {product.options.colors.map((color) => (
-                <option key={color.code} value={color.code}>{color.name}</option>
-              ))}
-            </select>
+           <div className={styles.actions}>
+            <div>
+              <label className={styles.selectLabel}>Color</label>
+              <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} className={styles.select}>
+                {product.options.colors.map((color) => (
+                  <option key={color.code} value={color.code}>{color.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className={styles.selectLabel}>Almacenamiento</label>
+              <select value={selectedStorage} onChange={(e) => setSelectedStorage(e.target.value)} className={styles.select}>
+                {product.options.storages.map((storage) => (
+                  <option key={storage.code} value={storage.code}>{storage.name}</option>
+                ))}
+              </select>
+            </div>
+            <button onClick={handleAddToCart} className={styles.addButton}>
+              Añadir al carrito
+            </button>
           </div>
-
-          <div style={{ marginTop: '1rem' }}>
-            <label><strong>Almacenamiento:</strong></label>
-            <select value={selectedStorage} onChange={(e) => setSelectedStorage(e.target.value)} style={{ display: 'block', marginTop: '0.5rem', padding: '0.5rem', width: '100%' }}>
-              {product.options.storages.map((storage) => (
-                <option key={storage.code} value={storage.code}>{storage.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <button onClick={handleAddToCart} style={{ marginTop: '1.5rem', padding: '0.75rem 2rem', cursor: 'pointer', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '4px' }}>
-            Añadir al carrito
-          </button>
         </div>
       </div>
     </div>
